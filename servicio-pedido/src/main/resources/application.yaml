@@ -1,0 +1,25 @@
+server:
+  port: ${PORT:8083}
+
+spring:
+  application:
+    name: servicio-pedido
+    
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:bd_pedido}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+    
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+     ddl-auto: ${DDL_AUTO:update}
+    show-sql: ${SHOW_SQL:true}
+    properties:
+      "[hibernate.format_sql]": true
+    
+logging:
+ level:
+    "[org.springframework.web]": INFO
+    "[org.hibernate.SQL]": DEBUG
