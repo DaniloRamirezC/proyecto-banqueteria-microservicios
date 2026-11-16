@@ -1,0 +1,15 @@
+services:
+  postgres-admin:
+    image: postgres:18-alpine
+    container_name: postgres-admin
+    restart: always
+    environment:
+      POSTGRES_DB: bd_admin
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5436:5432"
+    volumes:
+      - postgres_admin_data:/var/lib/postgresql/data
+volumes:
+  postgres_admin_data:
