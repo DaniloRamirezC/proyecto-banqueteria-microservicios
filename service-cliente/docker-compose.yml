@@ -1,0 +1,15 @@
+services:
+  postgres-cliente:
+    image: postgres:16-alpine
+    container_name: postgres-cliente
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: bd_cliente
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5434:5432"
+    volumes:
+      - service_cliente_data:/var/lib/postgresql/data
+volumes:
+  service_cliente_data:
