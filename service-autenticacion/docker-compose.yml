@@ -1,0 +1,16 @@
+services:
+  postgres-autenticacion:
+    image: postgres:16-alpine
+    container_name: postgres-autenticacion
+    restart: always
+    environment:
+      POSTGRES_DB: bd_autenticacion
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5437:5432"
+    volumes:
+      - postgres_autenticacion_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_autenticacion_data:
