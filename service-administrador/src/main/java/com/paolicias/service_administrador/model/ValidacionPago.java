@@ -24,6 +24,7 @@ public class ValidacionPago {
     private Long idValidacion;
     private Long idAdmin;
     private Long idComprobante;
+    private Long idEvento;
     private Boolean estadoValidacion;
     private String observacionAdmin;
     private LocalDateTime fechaRevision;

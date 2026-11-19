@@ -119,6 +119,6 @@ public class AdminServiceImpl implements AdminService{
     @Override 
     @Transactional(readOnly = true)
     public List<ValidacionPago> listarValidacionPorAdmin(Long idAdmin){
-        return validacionPagoRepository.findByIdAdminFechaRevision(idAdmin);
+        return validacionPagoRepository.findByIdAdminOrderByFechaRevisionDesc(idAdmin);
     }
 }
