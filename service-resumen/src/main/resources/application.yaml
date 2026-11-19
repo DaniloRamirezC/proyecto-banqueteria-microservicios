@@ -1,0 +1,21 @@
+server:
+    port: ${PORT:8086}
+spring:
+    application:
+        name: service-resumen
+    datasource:
+        url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5438}/${DB_NAME:bd_resumen}
+        username: ${DB_USER:postgres}
+        password: ${DB_PASSWORD:postgres}
+        driver-class-name: org.postgresql.Driver
+    jpa:
+        hibernate:
+            ddl-auto: ${DDL_AUTO:update}
+        show-sql: ${SHOW_SQL:true}
+        properties:
+            hibernate:
+                "[format_sql]": true
+logging:
+    level:
+        "[org.springframework.web]": INFO
+        "[org.hibernate.SQL]": DEBUG
