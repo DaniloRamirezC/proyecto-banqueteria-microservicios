@@ -68,7 +68,7 @@ public class AdminController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/logistica")
+    @GetMapping("/estimacion-operativa")
     public ResponseEntity<?> obtenerEstimacion(@RequestParam int asistentes, @RequestParam(defaultValue = "Banquetería") String tipoEvento){
         try{
             EstimacionOperativaDTO estimacion = adminService.calcularEstimacion(asistentes, tipoEvento);
