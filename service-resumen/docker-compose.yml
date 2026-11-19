@@ -1,0 +1,16 @@
+services:
+  postgres-resumen:
+    image: postgres:16-alpine
+    container_name: postgres-resumen
+    restart: always
+    environment:
+      POSTGRES_DB: bd_resumen
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5438:5432"
+    volumes:
+      - postgres_resumen_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_resumen_data:
