@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.paolicias.service_administrador.dto.EstimacionOperativaDTO;
 import com.paolicias.service_administrador.model.Administrador;
+import com.paolicias.service_administrador.model.ValidacionPago;
 import com.paolicias.service_administrador.service.AdminService;
 
 @RestController 
@@ -62,6 +65,31 @@ public class AdminController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id){
         adminService.eliminar(id);
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/logistica")
+    public ResponseEntity<?> obtenerEstimacion(@RequestParam int asistentes, @RequestParam(defaultValue = "Banquetería") String tipoEvento){
+        try{
+            EstimacionOperativaDTO estimacion = adminService.calcularEstimacion(asistentes, tipoEvento);
+            return ResponseEntity.ok(estimacion);
+        }catch (IllegalArgumentException ex){
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
+    @PostMapping("/{idAdmin}/validar-comprobante")
+    public ResponseEntity<?> validarComprobante(@PathVariable Long idAdmin, @RequestBody ValidacionPago validacion){
+        try{
+            ValidacionPago guardado = adminService.registraValidacionPago(idAdmin, validacion);
+            return ResponseEntity.status(HttpStatus.CREATED).body(guardado);
+        }catch(IllegalArgumentException ex){
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
+
+    @GetMapping("/{idAdmin}/validaciones")
+    public ResponseEntity<List<ValidacionPago>> listarValidacion(@PathVariable Long idAdmin){
+        return ResponseEntity.ok(adminService.listarValidacionPorAdmin(idAdmin));
+    }
+
 }
