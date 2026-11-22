@@ -11,6 +11,26 @@ services:
       - "5437:5432"
     volumes:
       - postgres_autenticacion_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d bd_autenticacion"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  autenticacion-api:
+    build: .
+    container_name: autenticacion-api
+    restart: always
+    depends_on:
+      postgres-autenticacion:
+        condition: service_healthy
+    env_file: .env
+    environment:
+      DB_HOST: postgres-autenticacion
+      DB_PORT: "5432"
+      PORT: "8085"
+    ports:
+      - "8085:8085"
 
 volumes:
   postgres_autenticacion_data:

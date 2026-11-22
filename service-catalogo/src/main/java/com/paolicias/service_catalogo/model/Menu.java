@@ -27,8 +27,7 @@ public class Menu {
 
     @NotNull
     @PositiveOrZero
-    @Column(precision = 12, scale = 2)
-    private BigDecimal precio;
+    private int precio;
 
     @NotNull
     @Column(name = "id_categoria", nullable = false)

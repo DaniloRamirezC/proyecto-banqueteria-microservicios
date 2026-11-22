@@ -11,5 +11,26 @@ services:
       - "5436:5432"
     volumes:
       - postgres_admin_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d bd_admin"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  admin-api:
+    build: .
+    container_name: admin-api
+    restart: always
+    depends_on:
+      postgres-admin:
+        condition: service_healthy
+    env_file: .env
+    environment:
+      DB_HOST: postgres-admin
+      DB_PORT: "5432"
+      PORT: "8084"
+    ports:
+      - "8084:8084"
+    
 volumes:
   postgres_admin_data:

@@ -11,5 +11,25 @@ services:
       - "5434:5432"
     volumes:
       - service_cliente_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d bd_cliente"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  cliente-api:
+    build: .
+    container_name: cliente-api
+    restart: unless-stopped
+    depends_on:
+      postgres-cliente:
+        condition: service_healthy
+    env_file: .env
+    environment:
+      DB_HOST: postgres-cliente
+      DB_PORT: "5432"
+      PORT: "8082"
+    ports:
+      - "8082:8082"
 volumes:
   service_cliente_data:

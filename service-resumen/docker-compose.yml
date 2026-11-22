@@ -11,6 +11,26 @@ services:
       - "5438:5432"
     volumes:
       - postgres_resumen_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d bd_resumen"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  resumen-api:
+    build: .
+    container_name: resumen-api
+    restart: always
+    depends_on:
+      postgres-resumen:
+        condition: service_healthy
+    env_file: .env
+    environment:
+      DB_HOST: postgres-resumen
+      DB_PORT: "5432"
+      PORT: "8086"
+    ports:
+      - "8086:8086"
 
 volumes:
   postgres_resumen_data:
