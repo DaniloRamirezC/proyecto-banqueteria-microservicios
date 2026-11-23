@@ -20,22 +20,22 @@ public class Resumen {
     private Long id_evento;
 
     @Column(nullable = false)
-    private Double precio_persona;
+    private Integer precio_persona;
 
     @Transient
     private Integer canti_personas;
 
     @Column(nullable = false)
-    private Double subtotal;
+    private Integer subtotal;
 
     @Column(nullable = false)
-    private Double iva;
+    private Integer iva;
 
     @Column(nullable = false)
-    private Double total;
+    private Integer total;
 
     @Column(nullable = false)
-    private Double monto_abono;
+    private Integer monto_abono;
 
     @PrePersist
     @PreUpdate
@@ -43,9 +43,9 @@ public class Resumen {
         double precio = precio_persona != null ? precio_persona : 0.0;
         int cantidad = canti_personas != null ? canti_personas : 1;
 
-        this.subtotal = precio * cantidad;
+        this.subtotal = (int) (precio * cantidad);
         this.iva = this.subtotal * 0.19;
-        this.total = this.subtotal + this.iva;
-        this.monto_abono = this.total * 0.50;
+        this.total = (int) (this.subtotal + this.iva);
+        this.monto_abono = (int) (this.total /2);
     }
 }
