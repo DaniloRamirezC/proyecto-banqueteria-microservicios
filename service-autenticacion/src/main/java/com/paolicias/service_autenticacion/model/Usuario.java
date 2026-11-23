@@ -14,8 +14,10 @@ public class Usuario {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_usuario;
-    private String nombre_usuario;
+    @Column(name = "id_usuario")
+    private Long idUsuario;
+    @Column(name = "nombre_usuario", nullable = false)
+    private String nombreUsuario;
     private String contrasena;
     @Column(unique = true, nullable = false)
     private String correo;

@@ -23,7 +23,7 @@ public class JwtUtil {
         SecretKey key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
         return Jwts.builder()
                 .subject(usuario.getCorreo())
-                .claim("idUsuario", usuario.getId_usuario())
+                .claim("idUsuario", usuario.getIdUsuario())
                 .claim("rol", usuario.getRol().getId_rol())
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + expiration))

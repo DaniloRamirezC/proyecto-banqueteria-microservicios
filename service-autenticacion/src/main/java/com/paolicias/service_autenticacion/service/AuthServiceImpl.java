@@ -61,7 +61,7 @@ public class AuthServiceImpl implements AuthService {
                 .orElseThrow(() -> new IllegalArgumentException("Rol inválido: " + nombreRolSolicitado));
 
         Usuario usuario = new Usuario();
-        usuario.setNombre_usuario(request.getNombreUsuario());
+        usuario.setNombreUsuario(request.getNombreUsuario());
         usuario.setCorreo(request.getCorreo());
         usuario.setContrasena(passwordEncoder.encode(request.getContrasena()));
         usuario.setRol(rol);
@@ -71,8 +71,8 @@ public class AuthServiceImpl implements AuthService {
 
         return new AuthResponse(
                 token,
-                guardado.getId_usuario(),
-                guardado.getNombre_usuario(),
+                guardado.getIdUsuario(),
+                guardado.getNombreUsuario(),
                 guardado.getCorreo(),
                 guardado.getRol().getNombreRol()
         );
@@ -92,8 +92,8 @@ public class AuthServiceImpl implements AuthService {
 
         return new AuthResponse(
                 token,
-                usuario.getId_usuario(),
-                usuario.getNombre_usuario(),
+                usuario.getIdUsuario(),
+                usuario.getNombreUsuario(),
                 usuario.getCorreo(),
                 usuario.getRol().getNombreRol()
         );
