@@ -40,11 +40,11 @@ public class Resumen {
     @PrePersist
     @PreUpdate
     public void calcularMontos() {
-        double precio = precio_persona != null ? precio_persona : 0.0;
+        int precio = precio_persona != null ? precio_persona : 0;
         int cantidad = canti_personas != null ? canti_personas : 1;
 
         this.subtotal = (int) (precio * cantidad);
-        this.iva = this.subtotal * 0.19;
+        this.iva = (int) (this.subtotal * 0.19);
         this.total = (int) (this.subtotal + this.iva);
         this.monto_abono = (int) (this.total /2);
     }

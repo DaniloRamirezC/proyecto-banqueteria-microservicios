@@ -22,10 +22,10 @@ public class Comprobante {
     private Resumen resumen;
 
     @Column(nullable = false)
-    private Double total;
+    private Integer total;
 
     @Column(nullable = false)
-    private Double abono;
+    private Integer abono;
 
     @Column(nullable = false)
     private String estadoAbono; // "Pendiente" o "Pagado en 50%"
