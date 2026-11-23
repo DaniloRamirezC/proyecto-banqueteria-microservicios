@@ -1,5 +1,6 @@
 package com.paolicias.servicio_pedido.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
@@ -30,6 +31,6 @@ public class DetalleEvento {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "evento_id", nullable = false)
-    @JsonIgnore 
+    @JsonBackReference("evento-detalles")
     private Evento evento;
 }

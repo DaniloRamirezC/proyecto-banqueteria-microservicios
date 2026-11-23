@@ -34,8 +34,8 @@ public class Evento {
     private String observaciones;
     private Long clienteId; //Referencia lógica al microservicio cliente
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "evento", cascade = CascadeType.ALL)
+    @JsonManagedReference("evento-detalles")
+    @OneToMany(mappedBy = "evento", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DetalleEvento> detalles = new ArrayList<>();
 
 }
