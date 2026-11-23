@@ -53,9 +53,13 @@ public class AuthServiceImpl implements AuthService {
             throw new IllegalArgumentException("El correo ya se encuentra registrado.");
         }
 
-        String nombreRolSolicitado = (request.getNombreRol() != null && !request.getNombreRol().isBlank())
+        String rolEntrada = (request.getNombreRol() != null && !request.getNombreRol().isBlank())
                 ? request.getNombreRol().trim().toLowerCase()
                 : "cliente";
+        
+        final String nombreRolSolicitado = "admin".equals(rolEntrada)
+            ? "administrador"
+            : rolEntrada;
 
         Rol rol = rolRepository.findByNombreRol(nombreRolSolicitado)
                 .orElseThrow(() -> new IllegalArgumentException("Rol inválido: " + nombreRolSolicitado));
